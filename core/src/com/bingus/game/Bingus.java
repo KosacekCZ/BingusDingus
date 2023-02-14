@@ -22,13 +22,19 @@ public class Bingus extends Entity{
         SpriteManager.getInstance().draw("piskel", x, y);
 
         if (++t % Math.floor(Math.random() * 270) == 0) {
+            System.out.println("Bingus střílí. TODO: Vytvořit EnemyProjectile classu");
             // attack
-            EntityManager.getInstance().addEntity(new Projectile(x, y, 0, 10, direction));
+            // EntityManager.getInstance().addEntity(new EnemyProjectile(x, y, 0, 10, direction));
+            // TODO: vytvořit EnemyProjectile
         }
     }
 
     @Override
     public void onCollide(Entity e) {
-        if(e.)
+        // if(e.)
+    }
+
+    public EntityType getType() {
+        return EntityType.ENEMY;
     }
 }

@@ -8,8 +8,8 @@ public class ProjectileManager {
     private int t = 0;
 
     public void spawn(Player projectileOrigin) {
-        for (int i = 0; i < projectileOrigin.shotsFired; i++) {
-            projectiles.add(new PlayerProjectile(projectileOrigin, 360f / projectileOrigin.shotsFired * i));
+        for (int i = 0; i < projectileOrigin.shotsFired; i++) { // FIXME: střílí to 2x2 projektily s neúměrnou vzdáleností mezi nima
+            projectiles.add(new PlayerProjectile(projectileOrigin, (float) 360 / projectileOrigin.shotsFired * i));
         }
     }
 
