@@ -1,12 +1,12 @@
 package com.bingus.game;
 
-public class Bingus extends Enemy{
+public class Dingus extends Enemy{
     float x;
     float y;
     float speed;
     private int t = 0;
 
-    public Bingus(float spawnX, float spawnY, float speed) {
+    public Dingus(float spawnX, float spawnY, float speed) {
         x = spawnX;
         y = spawnY;
         this.speed = speed;
@@ -17,7 +17,7 @@ public class Bingus extends Enemy{
         x += Math.cos(direction) * speed;
         y += Math.sin(direction) * speed;
 
-        SpriteManager.getInstance().draw("piskel", x, y);
+        SpriteManager.getInstance().draw("zhulus", x, y);
 
         if (++t % 180 == 0) {
             // attack

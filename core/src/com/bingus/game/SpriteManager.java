@@ -30,7 +30,7 @@ public class SpriteManager {
     }
 
     public void draw(String name, float x, float y) {
-        batch.draw(textures.get(name), x, y, 64f, 64f);
+        batch.draw(textures.get(name), x, y, 128f, 128f);
     }
 
     public void batchBegin() {
