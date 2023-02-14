@@ -4,33 +4,50 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 // uprav to
 public class BingusGame extends ApplicationAdapter {
-	SpriteBatch batch;
 	Texture img;
+	Player pl = new Player();
+	Bingus b = new Bingus(10, 10, 2);
+	SpriteManager sm;
+	EnemyManager em;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		sm = SpriteManager.getInstance();
+		em = new EnemyManager();
+
+		sm.loadSprite("characters/Bingus.png", "player");
+		sm.loadSprite("characters/piskel.png", "piskel");
 	}
-	int x = 10;
+
+
 	@Override
 	public void render () {
-		ScreenUtils.clear(0, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, x, 10);
-		batch.end();
 
-		if (Gdx.input.isKeyPressed(Input.Keys.D)) x++;
+		ScreenUtils.clear(0.2f, 0.2f, 0.2f, 1);
+
+		// tady se dělá všechno renderování
+		sm.batchBegin();
+		pl.update(sm);
+		em.update(pl);
+
+		sm.batchEnd();
+
+
+
+
+
+
+
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		sm.dispose();
 	}
 }
