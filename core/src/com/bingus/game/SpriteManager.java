@@ -2,7 +2,6 @@ package com.bingus.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sun.security.provider.ConfigFile;
 
 import java.util.HashMap;
 
