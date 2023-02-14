@@ -15,14 +15,17 @@ public class BingusGame extends ApplicationAdapter {
 	Bingus b = new Bingus(10, 10, 2);
 	SpriteManager sm;
 	EnemyManager em;
+	EntityManager etm = EntityManager.getInstance();
 	
 	@Override
 	public void create () {
 		sm = SpriteManager.getInstance();
 		em = new EnemyManager();
+		etm.addEntity(new Player());
 
 		sm.loadSprite("characters/Bingus.png", "player");
 		sm.loadSprite("characters/piskel.png", "piskel");
+		sm.loadSprite("characters/projektyl.png", "projectile");
 	}
 
 
@@ -33,10 +36,12 @@ public class BingusGame extends ApplicationAdapter {
 
 		// tady se dělá všechno renderování
 		sm.batchBegin();
-		pl.update(sm);
+		pl.update();
 		em.update(pl);
+		etm.update();
 
 		sm.batchEnd();
+
 
 
 

@@ -20,7 +20,7 @@ public class EnemyManager {
         }
 
         for (Enemy e : enemies) {
-            e.update(player ,SpriteManager.getInstance());
+            e.update(player);
         }
     }
 }
