@@ -12,7 +12,6 @@ public class Player extends Entity {
     int shotsFired = 8;
     int firerate = 60; // shoots every x frames
     int shotDamage = 1;
-    final float speed = 8;
 
     public void update(){
         if (Gdx.input.isKeyPressed(Input.Keys.D)) x+=speed;
@@ -24,6 +23,10 @@ public class Player extends Entity {
 
     public void onCollide(Entity e) {
         //TODO kolize
+    }
+
+    public EntityType getType() {
+        return EntityType.PLAYER;
     }
 }
 

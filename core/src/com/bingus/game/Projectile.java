@@ -9,9 +9,10 @@ public abstract class Projectile extends Entity {
     protected float speed;
     private EntityType type;
 
-    public Projectile(float x, float y, int dmg, float spd, float direction, EntityType type) {
+    public Projectile(float x, float y, int dmg, float spd, float degreesDirection, EntityType type) {
         damage = dmg;
         speed = spd;
+        this.degreesDirection = degreesDirection;
         this.x = x;
         this.y = y;
         this.type = type;
