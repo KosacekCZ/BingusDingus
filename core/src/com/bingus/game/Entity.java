@@ -6,6 +6,7 @@ public abstract class Entity {
     protected float length;
     protected float height;
     private boolean destroy = false;
+    protected EntityType type;
 
     public abstract void update();
 
@@ -18,4 +19,6 @@ public abstract class Entity {
     public boolean isDestroy() {
         return destroy;
     }
+
+    public abstract EntityType getType();
 }

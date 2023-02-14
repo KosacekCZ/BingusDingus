@@ -33,6 +33,10 @@ public class SpriteManager {
         batch.draw(textures.get(name), x, y, 128f, 128f);
     }
 
+    public void draw(String name, float x, float y, float w, float h) {
+        batch.draw(textures.get(name), x, y, w, h);
+    }
+
     public void batchBegin() {
         batch.begin();
 
