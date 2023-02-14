@@ -6,13 +6,15 @@ public class Projectile extends Entity {
     private final float direction;
     public float x;
     public float y;
+    private EntityType type;
 
-    public Projectile(float x, float y, int dmg, float spd, float direction) {
+    public Projectile(float x, float y, int dmg, float spd, float direction, EntityType type) {
         damage = dmg;
         speed = spd;
         this.direction = direction;
         this.x = x;
         this.y = y;
+        this.type = type;
     }
 
     public void update() {
@@ -24,5 +26,9 @@ public class Projectile extends Entity {
     }
 
     public void onCollide(Entity e) {
+    }
+
+    public EntityType getType() {
+        return type;
     }
 }

@@ -2,7 +2,6 @@ package com.bingus.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sun.security.provider.ConfigFile;
 
 import java.util.HashMap;
 
@@ -32,6 +31,10 @@ public class SpriteManager {
 
     public void draw(String name, float x, float y) {
         batch.draw(textures.get(name), x, y, 128f, 128f);
+    }
+
+    public void draw(String name, float x, float y, float w, float h) {
+        batch.draw(textures.get(name), x, y, w, h);
     }
 
     public void batchBegin() {
