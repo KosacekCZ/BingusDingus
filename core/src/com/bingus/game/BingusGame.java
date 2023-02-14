@@ -26,29 +26,26 @@ public class BingusGame extends ApplicationAdapter {
 		sm.loadSprite("characters/Bingus.png", "player");
 		sm.loadSprite("characters/piskel.png", "piskel");
 		sm.loadSprite("characters/projektyl.png", "projectile");
+		sm.loadSprite("characters/zhulus_3.png", "zhulus");
 	}
 
 
 	@Override
 	public void render () {
-
 		ScreenUtils.clear(0.2f, 0.2f, 0.2f, 1);
 
-		// tady se dělá všechno renderování
+
 		sm.batchBegin();
+		// tady se dělá všechno renderování
 		pl.update();
 		em.update(pl);
 		etm.update();
 
+
+
+
+		// end
 		sm.batchEnd();
-
-
-
-
-
-
-
-
 	}
 	
 	@Override

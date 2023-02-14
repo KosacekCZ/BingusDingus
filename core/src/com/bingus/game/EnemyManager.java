@@ -11,6 +11,10 @@ public class EnemyManager {
             enemies.add(new Bingus((float)Math.random() * 1920,
                                     (float)Math.random() * 1080,
                                     (float) (Math.random() * 2) + 1));
+
+            enemies.add(new Dingus((float)Math.random() * 1920,
+                                    (float)Math.random() * 1080,
+                                    (float) (Math.random() * 2) + 1));
         }
     }
 
