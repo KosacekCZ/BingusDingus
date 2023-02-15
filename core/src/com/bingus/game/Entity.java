@@ -3,10 +3,11 @@ package com.bingus.game;
 public abstract class Entity {
     protected float x;
     protected float y;
-    protected float length;
+    protected float width;
     protected float height;
     private boolean destroy = false;
-    protected EntityType type;
+    protected int health;
+    private EntityType type;
 
     public abstract void update();
 

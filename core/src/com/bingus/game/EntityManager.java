@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class EntityManager {
     private ArrayList<Entity> entities = new ArrayList<>();
+    private ArrayList<Entity> tempBuffer = new ArrayList<>();
     private int t = 0;
     private static EntityManager instance;
     private Player player;
@@ -14,19 +15,33 @@ public class EntityManager {
     }
 
     public void addEntity(Entity e) {
-        entities.add(e);
+        tempBuffer.add(e);
     }
 
     public void update() {
         for (Entity e: entities) {
             e.update();
           for (Entity f : entities) {
-                 if (e != f && (e.x < f.x + f.length && e.x + e.length > f.x) && (e.y < f.y + f.height && e.y + e.height > f.y)) {
+              // System.out.println("E:" + e.x + " " + e.y + " " + " " + e.width + " " + e.height + " " + e.getType() + " F: " + f.x + " " + f.y + " " + " " + f.width + " " + f.height + " " + f.getType());
+                 if (((e.getType() == EntityType.PLAYER && f.getType() != EntityType.PLAYER) ||
+                         (e.getType() != EntityType.PLAYER && f.getType() == EntityType.PLAYER)) &&
+                         e.x < f.x + f.width &&
+                         e.x + e.width > f.x &&
+                         e.y < f.y + f.height &&
+                         e.y + e.height > f.y) {
+
+                     // System.out.println(e + " is colliding with " + f);
                      e.onCollide(f);
                  }
             }
         }
         entities.removeIf(Entity::isDestroy);
+
+        if (++t %60 == 0) {
+            SpawnManager.getInstance().spawnEntities();
+        }
+        entities.addAll(tempBuffer);
+        tempBuffer.clear();
     }
 
     public Player getPlayer() {

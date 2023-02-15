@@ -6,9 +6,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 // uprav to
 public class BingusGame extends ApplicationAdapter {
-	Texture img;
 	Player pl = new Player();
-	Bingus b = new Bingus(10, 10, 2);
 	SpriteManager sm;
 	EntityManager etm = EntityManager.getInstance();
 	ProjectileManager pm;
@@ -16,8 +14,10 @@ public class BingusGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		sm = SpriteManager.getInstance();
+
 		etm.spawnPlayer(new Player());
 		pm = new ProjectileManager();
+
 
 		sm.loadSprite("characters/Bingus.png", "");
 		sm.loadSprite("characters/piskel.png", "piskel");
@@ -26,6 +26,7 @@ public class BingusGame extends ApplicationAdapter {
 		sm.loadSprite("characters/projektyl.png", "projectile");
 		sm.loadSprite("characters/zhulus_3.png", "zhulus");
 		sm.loadSprite("characters/Mercedus.png", "player");
+		sm.loadSprite("characters/Peenus.png", "peenus");
 	}
 
 

@@ -1,16 +1,18 @@
 package com.bingus.game;
 
 public class Dingus extends Entity{
-    float x;
-    float y;
-    float speed;
+    public float speed;
     private int t = 0;
-    public final EntityType type = EntityType.ENEMY;
+    private float scale = 0.1f;
+    private boolean exploding = false;
 
-    public Dingus(float spawnX, float spawnY, float speed) {
-        x = spawnX;
-        y = spawnY;
+    public Dingus(float x, float y, float speed) {
+        this.x = x;
+        this.y = y;
+        this.width = 10f;
+        this.height = 10f;
         this.speed = speed;
+        this.health = 50;
     }
 
     public void update() {
@@ -19,18 +21,29 @@ public class Dingus extends Entity{
         x += Math.cos(direction) * speed;
         y += Math.sin(direction) * speed;
 
-        SpriteManager.getInstance().draw("zhulus", x, y);
-
-        if ((x + 10 == pl.x || x - 10 == pl.x) && (y + 10 == pl.y || y - 10 == pl.y)) {
-            for (int i = 0; i < 500; i++) {
-                SpriteManager.getInstance().draw("zhulus", x, y, 128f + i, 128f + i);
-            }
-
+        if (++t %60 == 0) {
+            // System.out.println("Dingus | x: " + x + " y: " + y);
         }
-    }
+
+
+
+        if (exploding && scale < 1) {
+            scale += 0.01f;
+            SpriteManager.getInstance().draw("peenus", x, y, scale, scale);
+        } else if(scale >= 1) {
+            destroy();
+        } else {
+                SpriteManager.getInstance().draw("zhulus", x, y, scale, scale);
+            }
+        }
 
     public void onCollide(Entity e) {
+        // System.out.println("colliding with " + e.getType());
+        if (e.getType() == EntityType.PLAYER) exploding = true;
+    }
 
+    public EntityType getType() {
+        return EntityType.ENEMY;
     }
 
     public EntityType getType() {

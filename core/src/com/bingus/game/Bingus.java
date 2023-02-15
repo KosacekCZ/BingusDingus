@@ -1,16 +1,16 @@
 package com.bingus.game;
 
 public class Bingus extends Entity{
-    float x;
-    float y;
-    float speed;
+        public float speed;
     private int t = 0;
-    public final EntityType type = EntityType.ENEMY;
 
-    public Bingus(float spawnX, float spawnY, float speed) {
-        x = spawnX;
-        y = spawnY;
+    public Bingus(float x, float y, float speed) {
+        this.x = x;
+        this.y = y;
+        this.width = 10;
+        this.height = 10;
         this.speed = speed;
+        this.health = 50;
     }
 
     public void update() {
@@ -22,16 +22,14 @@ public class Bingus extends Entity{
         SpriteManager.getInstance().draw("piskel", x, y);
 
         if (++t % Math.floor(Math.random() * 270) == 0) {
-            System.out.println("Bingus střílí. TODO: Vytvořit EnemyProjectile classu");
             // attack
-            // EntityManager.getInstance().addEntity(new EnemyProjectile(x, y, 0, 10, direction));
-            // TODO: vytvořit EnemyProjectile
+            EntityManager.getInstance().addEntity(new Projectile(x, y, 0, 10, direction, EntityType.ENEMYBULLET));
         }
     }
 
     @Override
     public void onCollide(Entity e) {
-        // if(e.)
+
     }
 
     public EntityType getType() {
