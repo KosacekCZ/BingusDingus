@@ -29,11 +29,8 @@ public class Dingus extends Entity{
         }
     }
 
+    @Override
     public void onCollide(Entity e) {
 
-    }
-
-    public EntityType getType() {
-        return EntityType.ENEMY;
     }
 }
