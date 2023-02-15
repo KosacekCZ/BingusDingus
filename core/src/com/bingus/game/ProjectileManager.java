@@ -20,7 +20,7 @@ public class ProjectileManager {
         }
 
         for (Projectile p : projectiles) {
-            p.update();
+            p.update(SpriteManager.getInstance());
         }
     }
 }
