@@ -1,11 +1,10 @@
 package com.bingus.game;
 
-public class Dingus extends Entity{
+public class Dingus extends Enemy{
     float x;
     float y;
     float speed;
     private int t = 0;
-    public final EntityType type = EntityType.ENEMY;
 
     public Dingus(float spawnX, float spawnY, float speed) {
         x = spawnX;
@@ -13,24 +12,20 @@ public class Dingus extends Entity{
         this.speed = speed;
     }
 
-    public void update() {
-        Player pl = EntityManager.getInstance().getPlayer();
+    public void update(Player pl) {
         float direction = (float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2));
         x += Math.cos(direction) * speed;
         y += Math.sin(direction) * speed;
 
         SpriteManager.getInstance().draw("zhulus", x, y);
 
-        if ((x + 10 == pl.x || x - 10 == pl.x) && (y + 10 == pl.y || y - 10 == pl.y)) {
-            for (int i = 0; i < 500; i++) {
-                SpriteManager.getInstance().draw("zhulus", x, y, 128f + i, 128f + i);
-            }
-
+        if (++t % 180 == 0) {
+            // attack
+            EntityManager.getInstance().addEntity(new Projectile(x, y, 0, 10, direction));
         }
     }
 
-    @Override
-    public void onCollide(Entity e) {
+    public void attack() {
 
     }
 }

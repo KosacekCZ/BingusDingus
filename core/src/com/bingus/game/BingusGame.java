@@ -14,22 +14,23 @@ public class BingusGame extends ApplicationAdapter {
 	Player pl = new Player();
 	Bingus b = new Bingus(10, 10, 2);
 	SpriteManager sm;
+	EnemyManager em;
 	EntityManager etm = EntityManager.getInstance();
 	ProjectileManager pm;
 	
 	@Override
 	public void create () {
 		sm = SpriteManager.getInstance();
-		etm.spawnPlayer(new Player());
+		em = new EnemyManager();
+		etm.addEntity(new Player());
 		pm = new ProjectileManager();
 
-		sm.loadSprite("characters/Bingus.png", "");
+		sm.loadSprite("characters/Bingus.png", "player");
 		sm.loadSprite("characters/piskel.png", "piskel");
 		sm.loadSprite("bullet.png", "bullet");
 		sm.loadSprite("missing.png", "missing");
 		sm.loadSprite("characters/projektyl.png", "projectile");
 		sm.loadSprite("characters/zhulus_3.png", "zhulus");
-		sm.loadSprite("characters/Mercedus.png", "player");
 	}
 
 
@@ -37,10 +38,11 @@ public class BingusGame extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(0.2f, 0.2f, 0.2f, 1);
 
-
+		// tady se dělá všechno renderování
 		sm.batchBegin();
 		// tady se dělá všechno renderování
 		pl.update();
+		em.update(pl);
 		pm.update(pl);
 		etm.update();
 
