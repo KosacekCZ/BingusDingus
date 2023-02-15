@@ -1,6 +1,6 @@
 package com.bingus.game;
 
-public abstract class Projectile extends Entity {
+public abstract class Projectile {
 
     public float x;
     public float y;
@@ -9,18 +9,13 @@ public abstract class Projectile extends Entity {
     protected float speed;
 
     public Projectile() {
-        damage = dmg;
-        speed = spd;
-        this.direction = direction;
-        this.x = x;
-        this.y = y;
+
     }
 
-    public void update() {
+    public void update(SpriteManager sm) {
         x += Math.cos(degreesDirection) * speed;
         y += Math.sin(degreesDirection) * speed;
-        SpriteManager.getInstance().draw("missing", x, y);
-    }
-    public void onCollide(Entity e) {
+
+        sm.draw("missing", x, y);
     }
 }

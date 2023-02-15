@@ -5,6 +5,6 @@ public abstract class Enemy {
     float y;
 
     public abstract void attack();
-    public abstract void update(Player pl);
+    public abstract void update(Player pl, SpriteManager sm);
 
 }

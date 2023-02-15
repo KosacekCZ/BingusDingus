@@ -8,13 +8,9 @@ public class EnemyManager {
 
     public void spawn(int count) {
         for (int i = 0; i < count; i++) {
-            enemies.add(new Bingus((float)Math.random() * 1920,
-                                    (float)Math.random() * 1080,
-                                    (float) (Math.random() * 2) + 1));
-
-            enemies.add(new Dingus((float)Math.random() * 1920,
-                                    (float)Math.random() * 1080,
-                                    (float) (Math.random() * 2) + 1));
+            enemies.add(new Bingus((float) Math.random() * 1920,
+                    (float) Math.random() * 1080,
+                    (float) (Math.random() * 2) + 1));
         }
     }
 
@@ -24,7 +20,7 @@ public class EnemyManager {
         }
 
         for (Enemy e : enemies) {
-            e.update(player);
+            e.update(player, SpriteManager.getInstance());
         }
     }
 
