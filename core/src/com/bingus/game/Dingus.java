@@ -20,6 +20,12 @@ public class Dingus extends Entity{
         x += Math.cos(direction) * speed;
         y += Math.sin(direction) * speed;
 
+        if (++t % 70 == 0) {
+            this.damage = 30;
+        } else {
+            this.damage = 0;
+        }
+
         if (exploding && scale < 1.3f) {
             scale += 0.01f;
             SpriteManager.getInstance().draw("peenus", x, y, scale, scale);

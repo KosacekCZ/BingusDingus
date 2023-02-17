@@ -3,9 +3,9 @@ package com.bingus.game;
 import java.util.ArrayList;
 
 public class EntityManager {
-    private ArrayList<Entity> entities = new ArrayList<>();
-    private ArrayList<Entity> tempBuffer = new ArrayList<>();
-    private int t = 0;
+    private final ArrayList<Entity> entities = new ArrayList<>();
+    private final ArrayList<Entity> tempBuffer = new ArrayList<>();
+    private long t = 0;
     private static EntityManager instance;
     private Player player;
 
@@ -36,8 +36,8 @@ public class EntityManager {
         }
         entities.removeIf(Entity::isDestroy);
 
-        if (++t %60 == 0) {
-            //SpawnManager.getInstance().spawnEntities();
+        if (++t %180 == 0) {
+            SpawnManager.getInstance().spawnEntities();
         }
         entities.addAll(tempBuffer);
         tempBuffer.clear();

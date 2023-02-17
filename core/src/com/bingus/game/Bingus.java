@@ -10,6 +10,7 @@ public class Bingus extends Entity{
         this.h = 10;
         this.speed = speed;
         this.health = 50;
+        this.damage = 5;
     }
 
     public void update() {
@@ -17,16 +18,21 @@ public class Bingus extends Entity{
         float direction = (float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2));
         x += Math.cos(direction) * speed;
         y += Math.sin(direction) * speed;
-
         SpriteManager.getInstance().draw("piskel", x, y);
 
-        if (++t % Math.floor(Math.random() * 270) == 0) {
+        if (++t % Math.floor(Math.random() * 270) + 120 == 0) {
             // attack
             EntityManager
                     .getInstance()
                     .addEntity(new EnemyProjectile(
-                                new Coordinate(this.x, this.y, 5, 5, ((float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2)))),
+                                new Coordinate(this.x, this.y, 5, 5, ((float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2)) / (float) (Math.PI))),
                             10, 10, "projectile"));
+        }
+
+        if (t % 60 == 0) {
+            this.damage = 10;
+        } else {
+            this.damage = 0;
         }
 
         if (health <= 0) destroy();
@@ -34,7 +40,6 @@ public class Bingus extends Entity{
 
     @Override
     public void onCollide(Entity e) {
-        System.out.println("collision with " + e);
         if (e.getType() == EntityType.PLAYERBULLET) {
             health -= e.damage;
             e.destroy();

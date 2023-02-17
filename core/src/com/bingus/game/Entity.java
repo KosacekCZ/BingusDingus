@@ -5,6 +5,7 @@ public abstract class Entity {
     protected float y;
     protected float w;
     protected float h;
+    protected float scale;
     protected float t = 0;
     protected float speed;
     private boolean destroy = false;

@@ -4,27 +4,33 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-// uprav to
 public class BingusGame extends ApplicationAdapter {
 	SpriteManager sm;
-	EntityManager etm = EntityManager.getInstance();
+	EntityManager etm;
+	PlayerManager pm;
 	
 	@Override
 	public void create () {
 		sm = SpriteManager.getInstance();
-
+		etm = EntityManager.getInstance();
+		pm = PlayerManager.getInstance();
 		etm.spawnPlayer(new Player());
 
 
-		sm.loadSprite("characters/Bingus.png", "");
-		sm.loadSprite("characters/piskel.png", "piskel");
+		sm.loadSprite("Bingus.png", "");
+		sm.loadSprite("background.png", "background");
+		sm.loadSprite("gradient.png", "gradient");
+		sm.loadSprite("healthbar.png", "healthbar");
+		sm.loadSprite("heart.png", "heart");
+		sm.loadSprite("piskel.png", "piskel");
 		sm.loadSprite("bullet.png", "bullet");
 		sm.loadSprite("missing.png", "missing");
-		sm.loadSprite("characters/projektyl.png", "projectile");
-		sm.loadSprite("characters/projektyl.png", "projectile2");
-		sm.loadSprite("characters/zhulus_3.png", "zhulus");
-		sm.loadSprite("characters/Mercedus.png", "player");
-		sm.loadSprite("characters/Peenus.png", "peenus");
+		sm.loadSprite("projektyl.png", "projectile");
+		sm.loadSprite("projektyl.png", "projectile2");
+		sm.loadSprite("blueProjectile.png", "blueProjectile");
+		sm.loadSprite("zhulus_3.png", "zhulus");
+		sm.loadSprite("Mercedus.png", "player");
+		sm.loadSprite("Peenus.png", "peenus");
 	}
 
 
@@ -34,11 +40,15 @@ public class BingusGame extends ApplicationAdapter {
 
 		sm.batchBegin();
 		// tady se dělá všechno renderování
+		SpriteManager.getInstance().draw("background", 0, 0, 2, 2.2f);
+
 		etm.update();
 
 
 
-
+		SpriteManager.getInstance().draw("gradient", 0, 800, 8, 2.2f);
+		SpriteManager.getInstance().draw("gradient", 0, 250, 8, -2.2f);
+		pm.drawHealth();
 		// end
 		sm.batchEnd();
 	}

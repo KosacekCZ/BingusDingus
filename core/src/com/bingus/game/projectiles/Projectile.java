@@ -31,7 +31,7 @@ public abstract class Projectile extends Entity {
 
     public abstract EntityType getType();
 
-    private void checkDestruction() {
+    protected void checkDestruction() {
         if ((this.x < 0 || this.x > 1920) || (this.y < 0 || this.y > 1080)) destroy();
     }
 }

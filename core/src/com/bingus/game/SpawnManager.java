@@ -8,14 +8,26 @@ public class SpawnManager {
     }
 
     public void spawnEntities() {
-        EntityManager.getInstance().addEntity(new Bingus(
-                Interval.randInInterval(-100, -50, 1970, 2070),
-                Interval.randInInterval(-100, -50, 1250, 1350),
-                (float)(Math.random() * 4) + 1));
+        if (Math.random() > 0.5) {
+            EntityManager.getInstance().addEntity(new Bingus(
+                    Interval.randInInterval(-100, 2070),
+                    Interval.randInInterval(-100, -50, 1250, 1350),
+                    (float)(Math.random() * 2) + 1));
 
-        EntityManager.getInstance().addEntity(new Dingus(
-                        Interval.randInInterval(-100, -50, 1920, 2070),
-                        Interval.randInInterval(-100, -50, 1080, 1350),
-                (float)(Math.random() * 4) + 1));
+            EntityManager.getInstance().addEntity(new Dingus(
+                    Interval.randInInterval(-100, 2070),
+                    Interval.randInInterval(-100, -50, 1080, 1350),
+                    (float)(Math.random() * 2) + 1));
+        } else {
+            EntityManager.getInstance().addEntity(new Bingus(
+                    Interval.randInInterval(-100, -50, 1970, 2070),
+                    Interval.randInInterval(-100, 1350),
+                    (float)(Math.random() * 2) + 1));
+
+            EntityManager.getInstance().addEntity(new Dingus(
+                    Interval.randInInterval(-100, -50, 1920, 2070),
+                    Interval.randInInterval(-100, 1350),
+                    (float)(Math.random() * 2) + 1));
+        }
     }
 }
