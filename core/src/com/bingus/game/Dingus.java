@@ -1,16 +1,15 @@
 package com.bingus.game;
 
 public class Dingus extends Entity{
-    public float speed;
-    private int t = 0;
+
     private float scale = 0.1f;
     private boolean exploding = false;
 
     public Dingus(float x, float y, float speed) {
         this.x = x;
         this.y = y;
-        this.width = 10f;
-        this.height = 10f;
+        this.w = 10f;
+        this.h = 10f;
         this.speed = speed;
         this.health = 50;
     }
@@ -21,32 +20,28 @@ public class Dingus extends Entity{
         x += Math.cos(direction) * speed;
         y += Math.sin(direction) * speed;
 
-        if (++t %60 == 0) {
-            // System.out.println("Dingus | x: " + x + " y: " + y);
-        }
-
-
-
-        if (exploding && scale < 1) {
+        if (exploding && scale < 1.3f) {
             scale += 0.01f;
             SpriteManager.getInstance().draw("peenus", x, y, scale, scale);
-        } else if(scale >= 1) {
+        } else if(scale >= 1.2f) {
             destroy();
         } else {
                 SpriteManager.getInstance().draw("zhulus", x, y, scale, scale);
             }
+
+        if (health <= 0) destroy();
         }
 
     public void onCollide(Entity e) {
-        // System.out.println("colliding with " + e.getType());
         if (e.getType() == EntityType.PLAYER) exploding = true;
+        else if (e.getType() == EntityType.PLAYERBULLET) {
+            health -= e.damage;
+            e.destroy();
+        }
     }
 
     public EntityType getType() {
         return EntityType.ENEMY;
     }
 
-    public EntityType getType() {
-        return EntityType.ENEMY;
-    }
 }

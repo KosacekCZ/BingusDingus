@@ -1,14 +1,13 @@
 package com.bingus.game;
+import com.bingus.game.projectiles.*;
 
 public class Bingus extends Entity{
-        public float speed;
-    private int t = 0;
 
     public Bingus(float x, float y, float speed) {
         this.x = x;
         this.y = y;
-        this.width = 10;
-        this.height = 10;
+        this.w = 10;
+        this.h = 10;
         this.speed = speed;
         this.health = 50;
     }
@@ -23,13 +22,23 @@ public class Bingus extends Entity{
 
         if (++t % Math.floor(Math.random() * 270) == 0) {
             // attack
-            EntityManager.getInstance().addEntity(new Projectile(x, y, 0, 10, direction, EntityType.ENEMYBULLET));
+            EntityManager
+                    .getInstance()
+                    .addEntity(new EnemyProjectile(
+                                new Coordinate(this.x, this.y, 5, 5, ((float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2)))),
+                            10, 10, "projectile"));
         }
+
+        if (health <= 0) destroy();
     }
 
     @Override
     public void onCollide(Entity e) {
-
+        System.out.println("collision with " + e);
+        if (e.getType() == EntityType.PLAYERBULLET) {
+            health -= e.damage;
+            e.destroy();
+        }
     }
 
     public EntityType getType() {

@@ -2,6 +2,7 @@ package com.bingus.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.bingus.game.projectiles.PlayerProjectile;
 
 public class Player extends Entity {
 
@@ -9,8 +10,8 @@ public class Player extends Entity {
     private int t = 0;
 
     public Player() {
-        this.width = 10f;
-        this.height = 10f;
+        this.w = 10f;
+        this.h = 10f;
         this.health = 100;
     }
 
@@ -23,20 +24,11 @@ public class Player extends Entity {
 
 
 
-        if (++t %60 == 0) {
-            // System.out.println("Player | x: " + x + " y: " + y);
-        }
+        if (++t % 120 == 0) attack(AttackType.BURST);
     }
 
     public void onCollide(Entity e) {
-
-        switch (e.getType()) {
-            case ENEMYBULLET:
-                receiveDamage(20);
-                break;
-        }
-
-
+        if(e.getType() == EntityType.ENEMYBULLET) receiveDamage(e.damage);
     }
 
     public EntityType getType() {
@@ -46,5 +38,21 @@ public class Player extends Entity {
     public void receiveDamage(int damage) {
         health -= damage;
         System.out.println(damage);
+    }
+
+    public void attack(AttackType at) {
+        EntityManager em = EntityManager.getInstance();
+        if(at == AttackType.BASIC) {
+            for (float i = 0; i < 2f; i += 0.25f) {
+                em.addEntity(new PlayerProjectile(new Coordinate(this.x, this.y, 5, 5, i), 20, 10, "projectile2"));
+            }
+
+        } else if (at == AttackType.BURST) {
+            for (float i = 0; i < 2f; i += 0.25f) {
+                em.addEntity(new PlayerProjectile(new Coordinate(this.x, this.y, 5, 5, i + 0.0f), 20, 9, "projectile2"));
+                em.addEntity(new PlayerProjectile(new Coordinate(this.x, this.y, 5, 5, i + 0.1f), 20, 10, "projectile2"));
+                em.addEntity(new PlayerProjectile(new Coordinate(this.x, this.y, 5, 5, i - 0.1f), 20, 8, "projectile2"));
+            }
+        }
     }
 }

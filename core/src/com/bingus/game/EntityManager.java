@@ -21,16 +21,15 @@ public class EntityManager {
     public void update() {
         for (Entity e: entities) {
             e.update();
+            System.out.println(entities.size());
           for (Entity f : entities) {
-              // System.out.println("E:" + e.x + " " + e.y + " " + " " + e.width + " " + e.height + " " + e.getType() + " F: " + f.x + " " + f.y + " " + " " + f.width + " " + f.height + " " + f.getType());
-                 if (((e.getType() == EntityType.PLAYER && f.getType() != EntityType.PLAYER) ||
-                         (e.getType() != EntityType.PLAYER && f.getType() == EntityType.PLAYER)) &&
-                         e.x < f.x + f.width &&
-                         e.x + e.width > f.x &&
-                         e.y < f.y + f.height &&
-                         e.y + e.height > f.y) {
+              // System.out.println("E:" + e.x + " " + e.y + " " + " " + e.w + " " + e.h + " " + e.getType() + " F: " + f.x + " " + f.y + " " + " " + f.w + " " + f.h + " " + f.getType());
+                 if (e != f &&
+                         e.x < f.x + f.w &&
+                         e.x + e.w > f.x &&
+                         e.y < f.y + f.h &&
+                         e.y + e.h > f.y) {
 
-                     // System.out.println(e + " is colliding with " + f);
                      e.onCollide(f);
                  }
             }
@@ -38,7 +37,7 @@ public class EntityManager {
         entities.removeIf(Entity::isDestroy);
 
         if (++t %60 == 0) {
-            SpawnManager.getInstance().spawnEntities();
+            //SpawnManager.getInstance().spawnEntities();
         }
         entities.addAll(tempBuffer);
         tempBuffer.clear();
