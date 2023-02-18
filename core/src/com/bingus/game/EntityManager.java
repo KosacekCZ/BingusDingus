@@ -36,7 +36,7 @@ public class EntityManager {
         }
         entities.removeIf(Entity::isDestroy);
 
-        if (++t %180 == 0) {
+        if (++t %30 == 0) {
             SpawnManager.getInstance().spawnEntities();
         }
         entities.addAll(tempBuffer);

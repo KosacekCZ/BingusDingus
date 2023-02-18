@@ -10,7 +10,7 @@ public class Player extends Entity {
     final float speed = 8;
     private int t = 0;
     private float r = 0f;
-    private AttackType weapon = AttackType.BASIC;
+    private AttackType weapon = AttackType.SPINNING;
 
     public Player() {
         this.w = 10f;
@@ -28,7 +28,7 @@ public class Player extends Entity {
 
 
 
-        if (t % 30 == 0) attack(weapon);
+        if (t % 5 == 0) attack(weapon);
         if (health <= 0) destroy();
         t++;
         r += r >= 2f ? -r : 0.115f;
