@@ -20,13 +20,13 @@ public class PlayerProjectile extends Projectile {
             x = (float)(pl.getX() + (Math.cos(t) * t * speed));
             y = (float)(pl.getY() + (Math.sin(t) * t * speed));
 
-            SpriteManager.getInstance().draw("blueProjectile", x, y);
         } else {
             x += Math.cos(direction) * (speed + t);
             y += Math.sin(direction) * (speed + t);
-            SpriteManager.getInstance().draw("projectile", x, y);
+
         }
 
+        SpriteManager.getInstance().draw(texture, x, y);
         checkDestruction();
     }
 
@@ -35,6 +35,7 @@ public class PlayerProjectile extends Projectile {
         if (e.getType() == EntityType.ENEMY && this.atype == AttackType.EXPLOSIVE) {
             for (float i = 0; i < 2f; i += 0.25f) {
                 em.addEntity(new PlayerProjectile(new Coordinate(this.x + (40 * (float) Math.cos(i)), this.y + (40 * (float) Math.cos(i)), 10, 10, i), 20, 8, "projectile3", null));
+                e.destroy();
             }
         }
     }
