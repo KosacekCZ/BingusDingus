@@ -8,8 +8,8 @@ public class Dingus extends Entity{
     public Dingus(float x, float y, float speed) {
         this.x = x;
         this.y = y;
-        this.w = 10f;
-        this.h = 10f;
+        this.w = 40f;
+        this.h = 40f;
         this.speed = speed;
         this.health = 50;
     }

@@ -1,6 +1,8 @@
 package com.bingus.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -22,11 +24,11 @@ public class BingusGame extends ApplicationAdapter {
 		sm.loadSprite("gradient.png", "gradient");
 		sm.loadSprite("healthbar.png", "healthbar");
 		sm.loadSprite("heart.png", "heart");
-		sm.loadSprite("piskel.png", "piskel");
+		sm.loadSprite("zhulus1.png", "piskel");
 		sm.loadSprite("bullet.png", "bullet");
 		sm.loadSprite("missing.png", "missing");
 		sm.loadSprite("projektyl.png", "projectile");
-		sm.loadSprite("projektyl.png", "projectile2");
+		sm.loadSprite("projectile3.png", "projectile3");
 		sm.loadSprite("blueProjectile.png", "blueProjectile");
 		sm.loadSprite("zhulus_3.png", "zhulus");
 		sm.loadSprite("Mercedus.png", "player");
@@ -49,6 +51,7 @@ public class BingusGame extends ApplicationAdapter {
 		SpriteManager.getInstance().draw("gradient", 0, 800, 8, 2.2f);
 		SpriteManager.getInstance().draw("gradient", 0, 250, 8, -2.2f);
 		pm.drawHealth();
+		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 		// end
 		sm.batchEnd();
 	}

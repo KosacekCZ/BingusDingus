@@ -43,7 +43,7 @@ public class PlayerManager {
             SpriteManager.getInstance().draw("heart", 1580, 1005, 2f, 2f);
             SpriteManager.getInstance().draw("heart", 1640, 1005, 2f, 2f);
 
-        } else if (em.getPlayer().health >= 0) {
+        } else if (em.getPlayer().health == 0) {
             SpriteManager.getInstance().draw("heart", 1580, 1005, 2f, 2f);
 
         } else {

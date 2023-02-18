@@ -1,5 +1,5 @@
 package com.bingus.game;
 
 public enum AttackType {
-    BASIC, BURST, RAPID, SPINNING,
+    BASIC, BURST, RAPID, SPINNING, EXPLOSIVE,
 }

@@ -6,8 +6,8 @@ public class Bingus extends Entity{
     public Bingus(float x, float y, float speed) {
         this.x = x;
         this.y = y;
-        this.w = 10;
-        this.h = 10;
+        this.w = 40;
+        this.h = 40;
         this.speed = speed;
         this.health = 50;
         this.damage = 5;
@@ -25,7 +25,7 @@ public class Bingus extends Entity{
             EntityManager
                     .getInstance()
                     .addEntity(new EnemyProjectile(
-                                new Coordinate(this.x, this.y, 5, 5, ((float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2)) / (float) (Math.PI))),
+                                new Coordinate(this.x, this.y, 10, 10, ((float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2)) / (float) (Math.PI))),
                             10, 10, "projectile"));
         }
 
