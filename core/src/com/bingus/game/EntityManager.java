@@ -22,8 +22,9 @@ public class EntityManager {
         for (Entity e: entities) {
             e.update();
             System.out.println(entities.size());
+
+            // Collision check for each entity in list
           for (Entity f : entities) {
-              // System.out.println("E:" + e.x + " " + e.y + " " + " " + e.w + " " + e.h + " " + e.getType() + " F: " + f.x + " " + f.y + " " + " " + f.w + " " + f.h + " " + f.getType());
                  if (e != f &&
                          e.x < f.x + f.w &&
                          e.x + e.w > f.x &&
@@ -34,11 +35,8 @@ public class EntityManager {
                  }
             }
         }
+        // Despawn of "dead" entities
         entities.removeIf(Entity::isDestroy);
-
-        if (++t % 20 == 0) {
-            SpawnManager.getInstance().spawnEntities();
-        }
         entities.addAll(tempBuffer);
         tempBuffer.clear();
     }

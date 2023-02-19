@@ -22,11 +22,6 @@ public class Bingus extends Entity{
 
         if (++t % Math.floor(Math.random() * 270) + 120 == 0) {
             // attack
-            EntityManager
-                    .getInstance()
-                    .addEntity(new EnemyProjectile(
-                                new Coordinate(this.x, this.y, 10, 10, ((float) (Math.atan2(pl.x - x, -(pl.y - y)) - (Math.PI / 2)) / (float) (Math.PI))),
-                            10, 10, "projectile"));
         }
 
         if (t % 60 == 0) {
