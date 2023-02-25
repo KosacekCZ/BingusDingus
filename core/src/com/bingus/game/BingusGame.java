@@ -1,7 +1,6 @@
 package com.bingus.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -16,6 +15,7 @@ public class BingusGame extends ApplicationAdapter {
 	SpawnManager sp;
 	GameManager gm;
 	WaveManager wm;
+	ObjectAnimator oa;
 	BitmapFont font;
 	private float t;
 	private float t2;
@@ -29,12 +29,13 @@ public class BingusGame extends ApplicationAdapter {
 		sp = SpawnManager.getInstance();
 		wm = WaveManager.getInstance();
 		gm = GameManager.getInstance();
+		oa = ObjectAnimator.getInstance();
 		em.spawnPlayer(new Player());
 
 		font = generateFont(48);
 		pm.setFont(generateFont(24));
 
-		wm.setWave(0);
+		wm.nextWave();
 		em.getPlayer().setWeapon(AttackType.BASIC);
 		sm.loadSprite("Bingus.png", "");
 		sm.loadSprite("background.png", "background");
@@ -56,6 +57,10 @@ public class BingusGame extends ApplicationAdapter {
 		sm.loadSprite("mogus/mogus1.png", "mogus1");
 		sm.loadSprite("mogus/mogus2.png", "mogus2");
 		sm.loadSprite("mogus/mogus3.png", "mogus3");
+		sm.loadSprite("coin.png", "coin");
+		sm.loadSprite("coin_animated.png", "coin_animated");
+		sm.loadSprite("amogus_walking.png", "amogus_walking");
+		sm.loadSprite("amogus_still.png", "amogus_still");
 	}
 
 
@@ -65,8 +70,10 @@ public class BingusGame extends ApplicationAdapter {
 		ScreenUtils.clear(0.2f, 0.2f, 0.2f, 1);
 
 		sm.batchBegin();
+		oa.update();
 		// Frame render start
 
+		// Gameplay render & update
 		if(gm.isStartGame()) {
 			SpriteManager.getInstance().draw("background", 0, 0, 2, 2.2f);
 			em.update();
@@ -76,6 +83,10 @@ public class BingusGame extends ApplicationAdapter {
 			sm.draw("gradient", 0, 800, 8, 2.2f);
 			sm.draw("gradient", 0, 250, 8, -2.2f);
 			pm.drawHealth();
+			pm.drawInventory();
+
+
+			// Draw main menu
 		} else if (!gm.isStartGame() && !gm.isPlayerDead()) {
 			sm.draw("background", 0, 0, 2, 2.2f);
 			sm.draw("gradient", 0, 50, 8, 8.2f);
@@ -92,6 +103,7 @@ public class BingusGame extends ApplicationAdapter {
 		}
 
 
+		// Exit Game
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 		// end
 		sm.batchEnd();
@@ -108,11 +120,11 @@ public class BingusGame extends ApplicationAdapter {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("assets/font/slkscrb.ttf"));
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = size;
-		parameter.borderWidth = 1;
+		parameter.borderWidth = 0;
 		parameter.color = Color.WHITE;
-		parameter.shadowOffsetX = 3;
-		parameter.shadowOffsetY = 3;
-		parameter.shadowColor = new Color(0.5f, 0.5f, 0.5f, 0.75f);
+		parameter.shadowOffsetX = 4;
+		parameter.shadowOffsetY = 4;
+		parameter.shadowColor = new Color(0.2f, 0.2f, 0.2f, 0.85f);
 		BitmapFont customFont = generator.generateFont(parameter); // font size 24 pixels
 		generator.dispose();
 		return customFont;

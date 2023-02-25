@@ -8,6 +8,11 @@ public class PlayerManager {
     private float scale = 2f;
     private float height = 12;
     private BitmapFont font;
+    EntityManager em = EntityManager.getInstance();
+    SpriteManager sm = SpriteManager.getInstance();
+    WaveManager wm = WaveManager.getInstance();
+    ObjectAnimator oa = ObjectAnimator.getInstance();
+
 
     public void update() {
         this.player.update();
@@ -23,8 +28,7 @@ public class PlayerManager {
     }
 
     public void drawHealth() {
-        EntityManager em = EntityManager.getInstance();
-        SpriteManager sm = SpriteManager.getInstance();
+
         sm.draw("panel", 1350, 10, 2.2f, 1f);
 
         if (em.getPlayer().health >= 80) {
@@ -72,7 +76,10 @@ public class PlayerManager {
     }
 
     public void drawInventory() {
-
+        sm.draw("panel", 10, 10, 2.2f, 1f);
+        font.draw(sm.batch, "$" + wm.getCoins(), 30, 50);
+        font.draw(sm.batch, "Wave " + wm.getWave(), 130, 50);
+        sm.draw(oa.animationManager("coin_animated"), 80, 20, 1.3f, 1.3f);
     }
 
     public void setFont(BitmapFont font) {

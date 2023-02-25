@@ -2,6 +2,7 @@ package com.bingus.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.HashMap;
 
@@ -33,6 +34,10 @@ public class SpriteManager {
         Texture t = textures.get(name);
 
         batch.draw(t, x, y, t.getWidth() * 2, t.getHeight() * 2);
+    }
+
+    public void draw(TextureRegion textureRegion, float x, float y, float w, float h) {
+        batch.draw(textureRegion, x, y, textureRegion.getRegionWidth()*2*w, textureRegion.getRegionHeight()*2*h);
     }
 
     public void draw(String name, float x, float y, float w, float h) {

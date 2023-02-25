@@ -21,7 +21,7 @@ public class EntityManager {
     public void update() {
         for (Entity e: entities) {
             e.update();
-            System.out.println(entities.size());
+            //System.out.println(entities.size());
 
             // Collision check for each entity in list
           for (Entity f : entities) {
@@ -48,5 +48,14 @@ public class EntityManager {
     public void spawnPlayer(Player player) {
         this.player = player;
         addEntity(player);
+    }
+
+    public boolean isEnemiesDead() {
+        int enemies = 0;
+        for (Entity e : entities) {
+            if(e.getType() == EntityType.ENEMY) enemies++;
+        }
+
+        return (enemies == 0);
     }
 }

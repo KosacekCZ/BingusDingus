@@ -6,11 +6,12 @@ import com.bingus.game.projectiles.PlayerProjectile;
 
 public class Player extends Entity {
     private boolean attackSwitch = false;
+    ObjectAnimator oa = ObjectAnimator.getInstance();
 
     final float speed = 8;
     private int t = 0;
     private float r = 0f;
-    private AttackType weapon = AttackType.EXPLOSIVE;
+    private AttackType weapon = AttackType.BASIC;
 
     public Player() {
         this.w = 10f;
@@ -20,11 +21,27 @@ public class Player extends Entity {
     }
 
     public void update(){
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) x+=speed;
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) x-=speed;
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) y+=speed;
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) y-=speed;
-        SpriteManager.getInstance().draw("player", x, y, scale, scale);
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            SpriteManager.getInstance().draw(oa.animationManager("amogus_walking"), x, y, scale, scale);
+        }
+        else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            SpriteManager.getInstance().draw(oa.animationManager("amogus_walking"), x + 64, y, -scale, scale);
+        }
+        else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            SpriteManager.getInstance().draw(oa.animationManager("amogus_walking"), x, y, scale, scale);
+        }
+        else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            SpriteManager.getInstance().draw(oa.animationManager("amogus_walking"), x, y, scale, scale);
+        } else {
+            SpriteManager.getInstance().draw("amogus_still", x, y, scale, scale);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) y+= speed;
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) y-= speed;
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) x-= speed;
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) x+= speed;
+
+
 
 
 
@@ -45,7 +62,7 @@ public class Player extends Entity {
 
     public void receiveDamage(int damage) {
         health -= damage;
-        System.out.println(damage);
+        // System.out.println(damage);
     }
 
     public void attack(AttackType at) {

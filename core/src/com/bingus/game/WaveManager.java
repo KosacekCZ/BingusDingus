@@ -7,9 +7,11 @@ public class WaveManager {
         return instance;
     }
 
+    EntityManager em = EntityManager.getInstance();
+
     private int coins = 0;
     private int score = 0;
-    private int wave = 0;
+    private int wave = -1;
 
 
     public int getCoins() {
@@ -32,7 +34,11 @@ public class WaveManager {
         return this.wave;
     }
 
-    public void setWave(int wave) {
-        this.wave += wave;
+    public void nextWave() {
+        this.wave++;
+    }
+
+    public void checkWaveEnd() {
+        if (em.isEnemiesDead()) nextWave();
     }
 }
